@@ -42,19 +42,19 @@
     <section class="section">
       <h2 class="section-title"><i class="fas fa-camera"></i> Boom trip photos! </h2>
       <div class="gallery">
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_100715.jpg" alt="Boom Trip 20250828_100715"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_100720.jpg" alt="Boom Trip 20250828_100720"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_100722.jpg" alt="Boom Trip 20250828_100722"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_102303.jpg" alt="Boom Trip 20250828_102303"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_102313.jpg" alt="Boom Trip 20250828_102313"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_102317.jpg" alt="Boom Trip 20250828_102317"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_113215.jpg" alt="Boom Trip 20250828_113215"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_113217.jpg" alt="Boom Trip 20250828_113217"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_150534.jpg" alt="Boom Trip 20250828_150534"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_150540.jpg" alt="Boom Trip 20250828_150540"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/IMG_0601.JPG" alt="Boom Trip IMG_0601"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/IMG_0602.JPG" alt="Boom Trip IMG_0602"></div>
-        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_113221.jpg" alt="Boom Trip 20250828_113221"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_100715.jpg" alt="Students at the Wavepark - 2025-08-28"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_100720.jpg" alt="Watching instructors demo surfing - 2025-08-28"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_100722.jpg" alt="Group getting ready - 2025-08-28"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_102303.jpg" alt="First waves - 2025-08-28"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_102313.jpg" alt="Instructors helping beginners - 2025-08-28"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_102317.jpg" alt="Team photo - 2025-08-28"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_113215.jpg" alt="Snacks and smiles - 2025-08-28"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_113217.jpg" alt="Students cheering - 2025-08-28"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_150534.jpg" alt="Sunset surf session - 2025-08-28"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_150540.jpg" alt="Surfing excitement - 2025-08-28"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/IMG_0601.JPG" alt="Heading to Wavepark - 2025"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/IMG_0602.JPG" alt="Group games - 2025"></div>
+        <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_113221.jpg" alt="Ready to dive - 2025-08-28"></div>
         <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_113231.jpg" alt="Boom Trip 20250828_113231"></div>
         <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_150547.jpg" alt="Boom Trip 20250828_150547"></div>
         <div class="gallery-item"><img loading="eager" src="BOOM PHOTOS 2025 2/20250828_150554.jpg" alt="Boom Trip 20250828_150554"></div>
@@ -198,6 +198,87 @@
       
     </section>
   </div>
+
+  <!-- Lightbox (hidden by default) -->
+  <div id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner" role="dialog" aria-modal="true">
+      <button class="lightbox-close" aria-label="Close">✕</button>
+      <div style="text-align:center;">
+        <img src="" alt="" id="lightbox-img">
+        <div class="caption" id="lightbox-caption"></div>
+      </div>
+      <div class="lightbox-nav">
+        <button id="lightbox-prev" aria-label="Previous">◀</button>
+        <button id="lightbox-next" aria-label="Next">▶</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple lightbox for the gallery
+    (function () {
+      const gallery = document.querySelector('.gallery');
+      if (!gallery) return;
+
+      const imgs = Array.from(gallery.querySelectorAll('img'));
+
+      // Add caption overlays using alt attributes
+      imgs.forEach(img => {
+        const wrapper = img.closest('.gallery-item');
+        if (!wrapper) return;
+        const cap = document.createElement('div');
+        cap.className = 'caption';
+        cap.textContent = img.alt || '';
+        wrapper.appendChild(cap);
+      });
+
+      const lightbox = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightbox-img');
+      const lbCaption = document.getElementById('lightbox-caption');
+      const btnClose = document.querySelector('.lightbox-close');
+      const btnPrev = document.getElementById('lightbox-prev');
+      const btnNext = document.getElementById('lightbox-next');
+
+      let current = 0;
+
+      function open(index) {
+        current = index;
+        lbImg.src = imgs[current].src;
+        lbImg.alt = imgs[current].alt || '';
+        lbCaption.textContent = imgs[current].alt || '';
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+      }
+
+      function close() {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        lbImg.src = '';
+        lbCaption.textContent = '';
+      }
+
+      function prev() { open((current - 1 + imgs.length) % imgs.length); }
+      function next() { open((current + 1) % imgs.length); }
+
+      imgs.forEach((img, i) => img.addEventListener('click', () => open(i)));
+      btnClose && btnClose.addEventListener('click', close);
+      btnPrev && btnPrev.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+      btnNext && btnNext.addEventListener('click', (e) => { e.stopPropagation(); next(); });
+
+      // close when clicking outside image
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) close();
+      });
+
+      // keyboard support
+      window.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      });
+    })();
+  </script>
 
   <footer>
     <div class="wicky-mascot"><i class="fas fa-water"></i></div>

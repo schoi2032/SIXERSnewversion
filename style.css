@@ -371,3 +371,106 @@ footer {
     .section { padding: 20px; }
     header h1 { font-size: 2rem; }
 }
+
+/* FUN FACTS & SIMULATIONS */
+.simulations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.simulation-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 300px;
+}
+
+.simulation-card h3 {
+    color: #0d47a1;
+    margin-bottom: 10px;
+}
+
+.simulation-card p {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: #546e7a;
+}
+
+/* Gravity Canvas */
+#gravityCanvas {
+    background: #f0f4f8;
+    border: 2px solid #cfd8dc;
+    border-radius: 8px;
+    cursor: crosshair;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.sim-controls {
+    margin-top: 15px;
+}
+
+/* Click Speed Test */
+.click-test-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+#clickScore, #clickTimer {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e88e5;
+}
+
+#clickBtn {
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: center;
+}
+
+/* Color Reactor */
+.reaction-box {
+    width: 100%;
+    height: 150px;
+    background-color: #3498db;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    user-select: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#reactionResult {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2e7d32;
+    min-height: 1.6em;
+}
+
+/* Fact Display */
+#fact-display {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #0d47a1;
+    text-align: center;
+    min-height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease-in-out;
+}

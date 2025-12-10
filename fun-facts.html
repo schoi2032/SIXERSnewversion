@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sixers - Fun Facts & Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <i class="fas fa-water dolphin-icon"></i>
+            <h1>Chadwick International Sixers</h1>
+        </div>
+
+        <p class="subtitle">Fun Facts & Simulations 🎮</p>
+    </header>
+
+
+    <nav>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="news.html"><i class="fas fa-newspaper"></i> News</a></li>
+            <li><a href="sports.html"><i class="fas fa-basketball-ball"></i> Sports</a></li>
+            <li><a href="comedy.html"><i class="fas fa-theater-masks"></i> Comedy</a></li>
+            <li><a href="fun-facts.html" class="active"><i class="fas fa-lightbulb"></i> Fun Facts</a></li>
+            <li><a href="spotlight.html"><i class="fas fa-star"></i> Spotlight</a></li>
+            <li><a href="interviews.html"><i class="fas fa-microphone"></i> Interviews</a></li>
+            <li><a href="Boom-trip-photos.html"><i class="fas fa-camera"></i> Trips & Events</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <!-- Did You Know Section -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-question-circle"></i> Did You Know?</h2>
+            <div class="comedy-container">
+                <p class="joke" id="fact-display">Loading amazing facts...</p>
+            </div>
+        </section>
+
+        <!-- Simulations Section -->
+        <section class="section" style="margin-top: 30px;">
+            <h2 class="section-title"><i class="fas fa-gamepad"></i> Mini Simulations</h2>
+
+            <div class="simulations-grid">
+
+                <!-- Gravity Box -->
+                <div class="card simulation-card">
+                    <h3><i class="fas fa-arrow-down"></i> Gravity Box</h3>
+                    <p>Click to add bouncing balls!</p>
+                    <canvas id="gravityCanvas" width="300" height="200"></canvas>
+                    <div class="sim-controls">
+                        <button id="clearBallsBtn" class="read-more">Clear Balls</button>
+                    </div>
+                </div>
+
+                <!-- Click Speed Test -->
+                <div class="card simulation-card">
+                    <h3><i class="fas fa-mouse-pointer"></i> Click Speed Test</h3>
+                    <p>How many times can you click in 10s?</p>
+                    <div class="click-test-area">
+                        <div id="clickScore">Score: 0</div>
+                        <div id="clickTimer">Time: 10s</div>
+                        <button id="clickBtn" class="read-more">Start Clicking!</button>
+                    </div>
+                </div>
+
+                <!-- Color Matcher (Simple Reaction) -->
+                <div class="card simulation-card">
+                    <h3><i class="fas fa-palette"></i> Color Reactor</h3>
+                    <p>Click when the box turns GREEN!</p>
+                    <div id="reactionBox" class="reaction-box">Wait...</div>
+                    <div id="reactionResult"></div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="wicky-mascot"><i class="fas fa-water"></i></div>
+        <p>Chadwick International - Grade 6 Sixers</p>
+        <p>© 2025 Sixers Website Club</p>
+        <p> Website Programmed by Taeyang Eum, Shane Choi</p>
+    </footer>
+
+    <script src="simulations.js"></script>
+</body>
+
+</html>

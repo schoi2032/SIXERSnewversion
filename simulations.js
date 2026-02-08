@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // --- 2. Gravity Box Simulation ---
+    // fixing taeyang's ai ahh code
     const canvas = document.getElementById('gravityCanvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -44,14 +45,32 @@ document.addEventListener('DOMContentLoaded', function () {
         let balls = [];
         const gravity = 0.5;
         const friction = 0.8;
+        const radi = 20;
 
         class Ball {
             constructor(x, y) {
+            // snapping
+                // up
+                if (y > canvas.height - radi) {
+                    y = canvas.height - radi;
+                }
+                // down
+                if (y < radi) {
+                    y = radi;
+                }
+                // left
+                if(x < radi) {
+                    x = radi;
+                }
+                // right
+                if( x > canvas.width - radi) {
+                    x = canvas.width - radi;
+                }
                 this.x = x;
                 this.y = y;
                 this.dy = 0;
                 this.dx = (Math.random() - 0.5) * 4;
-                this.radius = 10 + Math.random() * 10;
+                this.radius = radi;
                 this.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
             }
 
@@ -64,6 +83,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             update() {
+                if (this.y < 10) { 
+                    console.log("bump up");
+                }
                 if (this.y + this.radius + this.dy > canvas.height) {
                     this.dy = -this.dy * friction;
                     this.dx = this.dx * friction;

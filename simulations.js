@@ -35,52 +35,108 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 500);
         }, 6000);
     }
+    
+// --- 2. Gravity Box Simulation ---
+// fixing taeyang's ai ahh code
 
-    // Gravity Box
-function distance(x1, y1, x2, y2) {
-    const dx = x2 - x1;
-    const dy = y2 - y1;
-    return Math.sqrt(dx * dx + dy * dy);
+const canvas = document.getElementById('gravityCanvas');
+
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    const clearBtn = document.getElementById('clearBallsBtn');
+
+    let balls = [];
+
+    const gravity = 0.5;
+    const friction = 0.8;
+    const radi = 20;
+
+    class Ball {
+        constructor(x, y) {
+            // snapping
+            // up
+            if (y > canvas.height - radi) {
+                y = canvas.height - radi;
+            }
+            // down
+            if (y < radi) {
+                y = radi;
+            }
+            // left
+            if (x < radi) {
+                x = radi;
+            }
+            // right
+            if (x > canvas.width - radi) {
+                x = canvas.width - radi;
+            }
+
+            this.x = x;
+            this.y = y;
+            this.dy = 0;
+            this.dx = (Math.random() - 0.5) * 4;
+            this.radius = radi;
+            this.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        update() {
+            if (this.y < 10) {
+                console.log("bump up");
+            }
+
+            if (this.y + this.radius + this.dy > canvas.height) {
+                this.dy = -this.dy * friction;
+                this.dx = this.dx * friction;
+            } else {
+                this.dy += gravity;
+            }
+
+            if (
+                this.x + this.radius + this.dx > canvas.width ||
+                this.x - this.radius <= 0
+            ) {
+                this.dx = -this.dx;
+            }
+
+            this.x += this.dx;
+            this.y += this.dy;
+
+            this.draw();
+        }
+    }
+
+    // Animation Loop
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        balls.forEach(ball => ball.update());
+    }
+
+    animate();
+
+    // Add ball on click
+    canvas.addEventListener('mousedown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        balls.push(new Ball(x, y));
+    });
+
+    clearBtn.addEventListener('click', () => {
+        balls = [];
+    });
 }
 
-function resolveCollision(b1, b2) {
-    const dx = b2.x - b1.x;
-    const dy = b2.y - b1.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-
-    if (dist === 0) return;
-
-    // Normalize
-    const nx = dx / dist;
-    const ny = dy / dist;
-
-    // Relative velocity
-    const dvx = b1.dx - b2.dx;
-    const dvy = b1.dy - b2.dy;
-
-    // Velocity along normal
-    const impactSpeed = dvx * nx + dvy * ny;
-    if (impactSpeed > 0) return;
-
-    const restitution = 0.9; // bounciness
-    const impulse = -(1 + restitution) * impactSpeed / 2;
-
-    const ix = impulse * nx;
-    const iy = impulse * ny;
-
-    b1.dx += ix;
-    b1.dy += iy;
-    b2.dx -= ix;
-    b2.dy -= iy;
-
-    // Push balls apart so they don't overlap
-    const overlap = (b1.radius * 2 - dist) / 2;
-    b1.x -= nx * overlap;
-    b1.y -= ny * overlap;
-    b2.x += nx * overlap;
-    b2.y += ny * overlap;
-}
-
+  
 
     // --- 3. Click Speed Test ---
     const clickBtn = document.getElementById('clickBtn');

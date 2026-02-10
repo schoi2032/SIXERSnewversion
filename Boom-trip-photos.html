@@ -467,69 +467,7 @@
   </div>
 
   <script>
-    // Simple lightbox for the gallery
-    (function () {
-      const gallery = document.querySelector('.gallery');
-      if (!gallery) return;
-
-      const imgs = Array.from(gallery.querySelectorAll('img'));
-
-      // Add caption overlays using alt attributes
-      imgs.forEach(img => {
-        const wrapper = img.closest('.gallery-item');
-        if (!wrapper) return;
-        const cap = document.createElement('div');
-        cap.className = 'caption';
-        cap.textContent = img.alt || '';
-        wrapper.appendChild(cap);
-      });
-
-      const lightbox = document.getElementById('lightbox');
-      const lbImg = document.getElementById('lightbox-img');
-      const lbCaption = document.getElementById('lightbox-caption');
-      const btnClose = document.querySelector('.lightbox-close');
-      const btnPrev = document.getElementById('lightbox-prev');
-      const btnNext = document.getElementById('lightbox-next');
-
-      let current = 0;
-
-      function open(index) {
-        current = index;
-        lbImg.src = imgs[current].src;
-        lbImg.alt = imgs[current].alt || '';
-        lbCaption.textContent = imgs[current].alt || '';
-        lightbox.classList.add('active');
-        lightbox.setAttribute('aria-hidden', 'false');
-      }
-
-      function close() {
-        lightbox.classList.remove('active');
-        lightbox.setAttribute('aria-hidden', 'true');
-        lbImg.src = '';
-        lbCaption.textContent = '';
-      }
-
-      function prev() { open((current - 1 + imgs.length) % imgs.length); }
-      function next() { open((current + 1) % imgs.length); }
-
-      imgs.forEach((img, i) => img.addEventListener('click', () => open(i)));
-      btnClose && btnClose.addEventListener('click', close);
-      btnPrev && btnPrev.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
-      btnNext && btnNext.addEventListener('click', (e) => { e.stopPropagation(); next(); });
-
-      // close when clicking outside image
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) close();
-      });
-
-      // keyboard support
-      window.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
-        if (e.key === 'Escape') close();
-        if (e.key === 'ArrowLeft') prev();
-        if (e.key === 'ArrowRight') next();
-      });
-    })();
+    
   </script>
   <div class="container">
     <section class="section">

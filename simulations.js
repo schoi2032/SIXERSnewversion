@@ -35,108 +35,183 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 500);
         }, 6000);
     }
-    
-// --- 2. Gravity Box Simulation ---
-// fixing taeyang's ai ahh code
 
-const canvas = document.getElementById('gravityCanvas');
+    // --- 2. Gravity Box Simulation ---
+    // fixing taeyang's ai ahh code
+    // subtracts arrays (number arrays)
+    function arraySub (e,x) {
+        const sArray = [];
+        for (let i = 0; i < e.length && i < x.length; i++) {
+            sArray.push(e[i] - x[i]);
+        }
+        return sArray
+    }
+    // multiplies arrays (you'll understand in a second okay please)
+    function arrayMult (e,x) {
+        const sArray = [];
+        for (let i = 0; i < e.length && i < x.length; i++) {
+            sArray.push(e[i] * x[i]);
+        }
+        return sArray
+    }
+    function arrayAdd (e,x) {
+        const sArray = [];
+        for (let i = 0; i < e.length && i < x.length; i++) {
+            sArray.push(e[i] + x[i]);
+        }
+        return sArray
+    }
 
-if (canvas) {
-    const ctx = canvas.getContext('2d');
-    const clearBtn = document.getElementById('clearBallsBtn');
-
-    let balls = [];
-
-    const gravity = 0.5;
-    const friction = 0.8;
-    const radi = 20;
-
-    class Ball {
-        constructor(x, y) {
+    function arrayDiv (e,x) {
+        const sArray = [];
+        for (let i = 0; i < e.length && i < x.length; i++) {
+            sArray.push(e[i] / x[i]);
+        }
+        return sArray
+    }
+    const canvas = document.getElementById('gravityCanvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        const clearBtn = document.getElementById('clearBallsBtn');
+        let balls = [];
+        const radi = 20;
+        let d = undefined
+        class Ball {
+            constructor(x, y) {
             // snapping
-            // up
-            if (y > canvas.height - radi) {
-                y = canvas.height - radi;
-            }
-            // down
-            if (y < radi) {
-                y = radi;
-            }
-            // left
-            if (x < radi) {
-                x = radi;
-            }
-            // right
-            if (x > canvas.width - radi) {
-                x = canvas.width - radi;
+                // up
+                if (y > canvas.height - radi) {
+                    y = canvas.height - radi;
+                }
+                // down
+                if (y < radi) {
+                    y = radi;
+                }
+                // left
+                if(x < radi) {
+                    x = radi;
+                }
+                // right
+                if( x > canvas.width - radi) {
+                    x = canvas.width - radi;
+                }
+                this.x = x;
+                this.y = y;
+                this.dy = -(Math.random() * 4);
+                this.dx = Math.random() * 4;
+                this.radius = radi;
+                this.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
             }
 
-            this.x = x;
-            this.y = y;
-            this.dy = 0;
-            this.dx = (Math.random() - 0.5) * 4;
-            this.radius = radi;
-            this.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            update() {
+                if (this.y + radi + this.dy > canvas.height) {
+                    this.edges("vert", canvas.height - this.y - radi - this.dy);
+                }
+
+                if (this.y + this.dy < radi) {
+                    this.edges("vert", radi - this.y - this.dy);
+                }
+
+                if (this.x + radi + this.dx > canvas.width) {
+                    this.edges("horz", canvas.width - this.x - radi - this.dx);
+                }
+
+                if (this.x + this.dx - radi <= 0) {
+                    this.edges("horz", radi - this.x - this.dx);
+                }
+                this.x += this.dx;
+                this.y += this.dy;
+
+                this.draw();
+            }
+            // checks for collision (may add quad tree)
+            collcheck() {
+                console.log("hi");
+                let ball1 = undefined;
+                let ball2 = undefined;
+                for (let i = balls.indexOf(this) + 1; i < balls.length; i++) {
+                        ball1 = this;
+                        ball2 = balls[i];
+                        // d means distance
+                        d = Math.sqrt((Math.abs(ball1.x-ball2.x) ** 2) + (Math.abs(ball1.y-ball2.y) ** 2));
+                        if (d < 40) {
+                            this.collresult(ball1, ball2, d, i);
+                    }
+
+                }
+            }
+            // collision resolution (resource: https://dipamsen.github.io/notebook/page/collisions.pdf)
+            collresult(b1, b2, d, i, j ) {
+                let b1Vect = [b1.dx, b1.dy];
+                let b2Vect = [b2.dx, b2.dy];
+                let b1Pos = [b1.x, b1.y];
+                let b2Pos = [b2.x, b2.y];
+                let vectSub = arraySub(b2Vect, b1Vect);
+                let posSub = arraySub(b2Pos, b1Pos);
+                 // b1 collision resolution
+                let b1$ = arrayDiv(arrayMult(vectSub,arrayMult(posSub, posSub)), arrayMult(posSub,posSub));
+                 // b2 collision resolution
+                let b2$ = [-((b1$)[0]), -((b1$)[1])];
+                b1.dx = arrayAdd(b1$, b1Vect)[0];
+                b1.dy = arrayAdd(b1$, b1Vect)[1];
+                b2.dx = arrayAdd(b2$, b2Vect)[0];
+                b2.dy = arrayAdd(b2$, b2Vect)[1];
+                const overlap = radi * 2 - d;
+                const nx = (b2.x - b1.x) / d;
+                const ny = (b2.y - b1.y) / d;
+
+                b1.x -= nx * overlap / 2;
+                b1.y -= ny * overlap / 2;
+                b2.x += nx * overlap / 2;
+                b2.y += ny * overlap / 2;
+            }
+            // edge collision
+            edges(type, amount) {
+                switch (type) {
+                    case "vert":
+                        this.dy = -this.dy;
+                        this.y += amount;
+                        break;
+                    case "horz":
+                        this.dx = -this.dx;
+                        this.x += amount;
+                        console.log(amount);
+                        break;
+                }
+
+            }
         }
 
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.fill();
-            ctx.closePath();
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            balls.forEach(ball  => ball.update());
+            balls.forEach(ball => ball.collcheck());
         }
 
-        update() {
-            if (this.y < 10) {
-                console.log("bump up");
-            }
+        animate();
 
-            if (this.y + this.radius + this.dy > canvas.height) {
-                this.dy = -this.dy * friction;
-                this.dx = this.dx * friction;
-            } else {
-                this.dy += gravity;
-            }
+        // Add ball on click
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            balls.push(new Ball(x, y));
+        });
 
-            if (
-                this.x + this.radius + this.dx > canvas.width ||
-                this.x - this.radius <= 0
-            ) {
-                this.dx = -this.dx;
-            }
-
-            this.x += this.dx;
-            this.y += this.dy;
-
-            this.draw();
-        }
+        clearBtn.addEventListener('click', () => {
+            balls = [];
+        });
     }
-
-    // Animation Loop
-    function animate() {
-        requestAnimationFrame(animate);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        balls.forEach(ball => ball.update());
-    }
-
-    animate();
-
-    // Add ball on click
-    canvas.addEventListener('mousedown', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        balls.push(new Ball(x, y));
-    });
-
-    clearBtn.addEventListener('click', () => {
-        balls = [];
-    });
-}
-
-  
 
     // --- 3. Click Speed Test ---
     const clickBtn = document.getElementById('clickBtn');

@@ -130,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 this.x += this.dx;
                 this.y += this.dy;
+                this.dy += 3
 
                 this.draw();
             }

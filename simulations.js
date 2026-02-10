@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
         "Some dolphins can jump as high as 20 feet out of the water.",
         "Dolphins use echolocation to find food and navigate.",
         "A baby dolphin is called a calf.",
-        "Dolphins are mammals, not fish!"
+        "Dolphins are mammals, not fish!",
+        "Taeyang made the background with Claude Opus 4 😈"
     ];
 
     const factElement = document.getElementById('fact-display');

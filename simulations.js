@@ -166,11 +166,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 switch (type) {
                     case "vert":
                         this.dy = -this.dy;
-                        this.y += amount;
                         break;
                     case "horz":
                         this.dx = -this.dx;
-                        this.x += amount;
                         console.log(amount);
                         break;
                 }

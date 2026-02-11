@@ -98,9 +98,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             update() {
-                if (this.y + radi + this.dy > canvas.height) {
+                if (this.y + radi + this.dy - 1> canvas.height) {
                     this.dy = this.dy * 0.8
-                    this.edges("vert", canvas.height - this.y - radi - this.dy);
+                    this.edges("vert", canvas.height - this.y - radi - this.dy - 1);
                 }
 
                 if (this.y + this.dy < radi) {

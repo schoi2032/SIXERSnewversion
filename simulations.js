@@ -81,21 +81,6 @@ document.addEventListener('DOMContentLoaded', function () {
             constructor(x, y) {
             // snapping
                 // up
-                if (y > canvas.height - radi) {
-                    y = canvas.height - radi;
-                }
-                // down
-                if (y < radi) {
-                    y = radi;
-                }
-                // left
-                if(x < radi) {
-                    x = radi;
-                }
-                // right
-                if( x > canvas.width - radi) {
-                    x = canvas.width - radi;
-                }
                 this.x = x;
                 this.y = y;
                 this.dy = -(Math.random() * 4);
@@ -114,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             update() {
                 if (this.y + radi + this.dy > canvas.height) {
+                    this.dy = this.dy * 0.8
                     this.edges("vert", canvas.height - this.y - radi - this.dy);
                 }
 
@@ -130,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 this.x += this.dx;
                 this.y += this.dy;
-                this.dy += 3
+                this.dy += 0.5;
 
                 this.draw();
             }

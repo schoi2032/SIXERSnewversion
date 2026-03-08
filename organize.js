@@ -22,15 +22,12 @@ fetch("../nav.html")
         document.querySelector("#nav a[href='fun-facts.html']").classList.add("active");
         break;
     case "4":
-        document.querySelector("#nav a[href='credits.html']").classList.add("active");
-        break;
-    case "5":
         document.querySelector("#nav a[href='spotlight.html']").classList.add("active");
         break;
-    case "6":
+    case "5":
         document.querySelector("#nav a[href='about.html']").classList.add("active");
         break;
-    case "7":
+    case "6":
         document.querySelector("#nav a[href='Boom-trip-photos.html']").classList.add("active");
         break;  
 }

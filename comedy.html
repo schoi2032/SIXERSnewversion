@@ -34,54 +34,66 @@
       <h2 class="section-title"><i class="fas fa-theater-masks"></i> Comedy stories & jokes</h2>
       <p class="section-subtitle">Warning: Laughter may cause your face to hurt!</p>
 
-      <div class="comedy-container">
-        <h3 class="joke-title"><i class="fas fa-laugh"></i> When you see people wearing a very expensive watch, it's hard to tell if they're really good with their money or very bad with their money.</h3>
-        <p class="joke-meta">By Hannah Fagogenis • Sep 2025</p>
-      </div>
+      <div class="comedy-showcase">
+        <div class="comedy-slideshow" tabindex="0" aria-label="Comedy slideshow">
+          <article class="joke-slide active">
+            <h3 class="joke-title"><i class="fas fa-laugh"></i> When you see people wearing a very expensive watch...</h3>
+            <p class="joke-ending" hidden>...it is hard to tell if they are great with money or terrible with money.</p>
+            <button class="joke-reveal-btn" type="button">Reveal the ending</button>
+            <p class="joke-meta">By Hannah Fagogenis • Sep 2025</p>
+          </article>
 
-      <div class="comedy-container">
-        <h3 class="joke-title"><i class="fas fa-laugh"></i> I put my phone on airplane mode, but it's not flying anywhere.</h3>
-        <p class="joke-meta">By Hannah Fagogenis • Nov 2025</p>
-      </div>
+          <article class="joke-slide">
+            <h3 class="joke-title"><i class="fas fa-laugh"></i> I put my phone on airplane mode...</h3>
+            <p class="joke-ending" hidden>...but it is not flying anywhere.</p>
+            <button class="joke-reveal-btn" type="button">Reveal the ending</button>
+            <p class="joke-meta">By Hannah Fagogenis • Nov 2025</p>
+          </article>
 
-      <div class="comedy-container">
-        <h3 class="joke-title"><i class="fas fa-laugh"></i> I sing, you sing, we all sing for icing!</h3>
-        <p class="joke-meta">By Hannah Fagogenis • Nov 2025</p>
-      </div>
+          <article class="joke-slide">
+            <h3 class="joke-title"><i class="fas fa-laugh"></i> I sing, you sing, we all sing...</h3>
+            <p class="joke-ending" hidden>...for icing!</p>
+            <button class="joke-reveal-btn" type="button">Reveal the ending</button>
+            <p class="joke-meta">By Hannah Fagogenis • Nov 2025</p>
+          </article>
 
-      <div class="comedy-container">
-        <h3 class="joke-title"><i class="fas fa-laugh"></i> What are a kidnapper's favorite shoes? White Vans!</h3>
-        <p class="joke-meta">By Noah Uuj Erikson • Feb 2026</p>
-      </div>
+          <article class="joke-slide">
+            <h3 class="joke-title"><i class="fas fa-laugh"></i> What are a kidnapper's favorite shoes?</h3>
+            <p class="joke-ending" hidden>White Vans!</p>
+            <button class="joke-reveal-btn" type="button">Reveal the ending</button>
+            <p class="joke-meta">By Noah Uuj Erikson • Feb 2026</p>
+          </article>
 
-      <div class="comedy-container">
-        <h3 class="joke-title"><i class="fas fa-laugh"></i> What do you get if you cross a sheep and a runner? A woolly sweater!</h3>
-        <p class="joke-meta">By Noah Uuj Erikson • Feb 2026</p>
-      </div>
+          <article class="joke-slide">
+            <h3 class="joke-title"><i class="fas fa-laugh"></i> What do you get if you cross a sheep and a runner?</h3>
+            <p class="joke-ending" hidden>A woolly sweater!</p>
+            <button class="joke-reveal-btn" type="button">Reveal the ending</button>
+            <p class="joke-meta">By Noah Uuj Erikson • Feb 2026</p>
+          </article>
 
-      <div class="comedy-container">
-        <h3 class="joke-title"><i class="fas fa-laugh"></i> Knock knock. Who's there? Crypt. Crypt who? Kryptonite!</h3>
-        <p class="joke-meta">By Noah Uuj Erikson • Feb 2026</p>
-      </div>
+          <article class="joke-slide">
+            <h3 class="joke-title"><i class="fas fa-laugh"></i> Knock knock. Who's there? Crypt. Crypt who?</h3>
+            <p class="joke-ending" hidden>Kryptonite!</p>
+            <button class="joke-reveal-btn" type="button">Reveal the ending</button>
+            <p class="joke-meta">By Noah Uuj Erikson • Feb 2026</p>
+          </article>
 
-      <div class="comedy-container">
-        <h3 class="joke-title"><i class="fas fa-laugh"></i> What are a kidnapper's favorite shoes? White Vans!</h3>
-        <p class="joke-meta">By Noah Uuj Erikson • Feb 2026</p>
-      </div>
+          <article class="joke-slide">
+            <h3 class="joke-title"><i class="fas fa-laugh"></i> Why was the boy scared of the birthday present?</h3>
+            <p class="joke-ending" hidden>Because CITY BOY.</p>
+            <button class="joke-reveal-btn" type="button">Reveal the ending</button>
+            <p class="joke-meta">By Noah Uuj Erikson • Feb 2026</p>
+          </article>
+        </div>
 
-      <div class="comedy-container">
-        <h3 class="joke-title"><i class="fas fa-laugh"></i> What are a kidnapper's favorite shoes? White Vans!</h3>
-        <p class="joke-meta">By Noah Uuj Erikson • Feb 2026</p>
-      </div>
+        <div class="comedy-controls">
+          <button class="slide-nav prev-slide" type="button" aria-label="Previous joke"><i class="fas fa-chevron-left"></i> Prev</button>
+          <p class="slide-indicator">1 / 7</p>
+          <button class="slide-nav next-slide" type="button" aria-label="Next joke">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="slide-dots" aria-hidden="true"></div>
 
-      <div class="comedy-container">
-        <h3 class="joke-title"><i class="fas fa-laugh"></i> What are a kidnapper's favorite shoes? White Vans!</h3>
-        <p class="joke-meta">By Noah Uuj Erikson • Feb 2026</p>
-      </div>
-
-      <div class="comedy-container">
-        <h3 class="joke-title"><i class="fas fa-laugh"></i> Why was the boy scared of the birthday present? Because CITY BOY.</h3>
-        <p class="joke-meta">By Noah Uuj Erikson • Feb 2026</p>
+        <audio id="jokeRevealAudio" src="After-Joke.mp3" preload="auto"></audio>
       </div>
     </section>
   </div>

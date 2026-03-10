@@ -1,3 +1,3 @@
 # New-Sixers-webpage
-If you need a webpage for your school be free to use our template
--Taeyang-Del
+If you need a webpage for your school, feel free to use our template
+-schoi2032 and Taeyang-del-

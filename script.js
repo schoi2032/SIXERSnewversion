@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
     'footer p'
   ];
 
+
+  document.head.appendChild(document.createElement('link')).rel = 'icon';
+  document.head.lastChild.href = 'icon.png'
+
+
   const revealElements = Array.from(document.querySelectorAll(revealSelectors.join(',')));
 
   if (!revealElements.length) {
